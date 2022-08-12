@@ -177,7 +177,7 @@ apps:
   #  topic: MY_TOPIC
   #
   #  # Or, a certificate can be used instead:
-  certfile: com.aplink.wallet.pem
+  certfile: /app/com.aplink.wallet.pem
   #
   #  # This is the maximum number of in-flight requests *for this pushkin*
   #  # before additional notifications will be failed.
