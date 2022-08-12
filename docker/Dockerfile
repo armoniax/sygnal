@@ -32,4 +32,4 @@ COPY ./sygnal.yaml /tmp
 
 EXPOSE 5000/tcp
 
-ENTRYPOINT ["SYGNAL_CONF=/tmp/sygnal.yaml python", "-m", "sygnal.sygnal"]
+CMD ["SYGNAL_CONF=/tmp/sygnal.yaml python -m sygnal.sygnal"]
