@@ -30,7 +30,7 @@ FROM python:3.7-slim
 COPY --from=builder /install /usr/local
 WORKDIR /app
 COPY ./sygnal.yaml /app
-
+ENV SYGNAL_CONF=/app/sygnal.yaml
 EXPOSE 5000/tcp
 
-ENTRYPOINT ["SYGNAL_CONF=/app/sygnal.yaml python", "-m", "sygnal.sygnal"]
+ENTRYPOINT ["python", "-m", "sygnal.sygnal"]
