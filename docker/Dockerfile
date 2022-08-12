@@ -31,4 +31,4 @@ COPY --from=builder /install /usr/local
 
 EXPOSE 5000/tcp
 
-ENTRYPOINT ["python", "-m", "sygnal.sygnal"]
+ENTRYPOINT ["SYGNAL_CONF=/sygnal/sygnal.yaml","python", "-m", "sygnal.sygnal"]
