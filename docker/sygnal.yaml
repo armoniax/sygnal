@@ -163,8 +163,8 @@ metrics:
 apps:
   # This is an example APNs push configuration
   #
-  com.example.myapp.ios:
-   type: apns
+  # com.example.myapp.ios:
+  #  type: apns
   #
   #  # Authentication
   #  #
