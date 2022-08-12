@@ -1,5 +1,5 @@
 *.pyc
-sygnal.yaml
+#sygnal.yaml
 var/
 sygnal.pid
 sygnal.db
