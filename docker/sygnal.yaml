@@ -163,8 +163,8 @@ metrics:
 apps:
   # This is an example APNs push configuration
   #
-  # com.example.myapp.ios:
-  #  type: apns
+  com.example.myapp.ios:
+   type: apns
   #
   #  # Authentication
   #  #
@@ -177,7 +177,7 @@ apps:
   #  topic: MY_TOPIC
   #
   #  # Or, a certificate can be used instead:
-  certfile: /app/com.aplink.wallet.pem
+  certfile: com.aplink.wallet.pem
   #
   #  # This is the maximum number of in-flight requests *for this pushkin*
   #  # before additional notifications will be failed.
