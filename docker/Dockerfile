@@ -33,4 +33,5 @@ COPY . /app
 ENV SYGNAL_CONF=/app/sygnal.yaml
 EXPOSE 5000/tcp
 
-ENTRYPOINT ["python", "-m", "sygnal.sygnal"]
+#ENTRYPOINT ["python", "-m", "sygnal.sygnal"]
+ENTRYPOINT ["/bin/bash"]
