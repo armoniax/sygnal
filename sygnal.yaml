@@ -163,8 +163,11 @@ metrics:
 apps:
   # This is an example APNs push configuration
   #
-  com.example.myapp.ios:
-   type: apns
+  # com.example.myapp.ios:
+  #  type: apns
+  com.aplink.wallet:
+    type: gcm
+    api_key: AAAA89eVgMc:APA91bF0Mqap5ayANkfIkUV0RomCSrAiZ_NKXHKAEV4sseeWSPCTuhZYIOpzcBFcOjbCqJI4uDXM14Yg1qgm0xJUlD9qfoW0wbOSQBVgkWh5IKJqRPxhrOfDU5gGl8Vb91ZeQJ3tEIu
   #
   #  # Authentication
   #  #
