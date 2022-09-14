@@ -165,9 +165,9 @@ apps:
   #
   # com.example.myapp.ios:
   #  type: apns
-   com.aplink.wallet:
-     type: gcm
-     api_key: AAAA89eVgMc:APA91bF0Mqap5ayANkfIkUV0RomCSrAiZ_NKXHKAEV4sseeWSPCTuhZYIOpzcBFcOjbCqJI4uDXM14Yg1qgm0xJUlD9qfoW0wbOSQBVgkWh5IKJqRPxhrOfDU5gGl8Vb91ZeQJ3tEIu
+  com.aplink.wallet:
+    type: gcm
+    api_key: AAAA89eVgMc:APA91bF0Mqap5ayANkfIkUV0RomCSrAiZ_NKXHKAEV4sseeWSPCTuhZYIOpzcBFcOjbCqJI4uDXM14Yg1qgm0xJUlD9qfoW0wbOSQBVgkWh5IKJqRPxhrOfDU5gGl8Vb91ZeQJ3tEIu
   #
   #  # Authentication
   #  #
@@ -180,7 +180,7 @@ apps:
   #  topic: MY_TOPIC
   #
   #  # Or, a certificate can be used instead:
-   certfile: com.aplink.wallet.pem
+    certfile: com.aplink.wallet.pem
   #
   #  # This is the maximum number of in-flight requests *for this pushkin*
   #  # before additional notifications will be failed.
