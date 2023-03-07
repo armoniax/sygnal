@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y git
 
 COPY . /sygnal/
 
-RUN pip install --prefix="/install" --no-warn-script-location /sygnal
+RUN python -m pip install --upgrade pip && pip install --prefix="/install" --no-warn-script-location /sygnal
 
 ###
 ### Stage 1: runtime
