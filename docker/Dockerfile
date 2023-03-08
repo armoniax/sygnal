@@ -13,13 +13,17 @@ FROM python:3.7-slim as builder
 
 # Install git; Sygnal uses it to obtain the package version from the state of the
 # git repository.
+RUN sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+RUN sed -i s@/security.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+RUN apt-get clean
+
 RUN apt-get update && apt-get install -y git
 
 # install sygnal and all of the python deps to /install.
 
 COPY . /sygnal/
 
-RUN pip install --prefix="/install" --no-warn-script-location /sygnal
+RUN python -m pip install --upgrade pip && pip install --prefix="/install" --no-warn-script-location /sygnal
 
 ###
 ### Stage 1: runtime
@@ -27,6 +31,9 @@ RUN pip install --prefix="/install" --no-warn-script-location /sygnal
 
 FROM python:3.7-slim
 COPY --from=builder /install /usr/local
+WORKDIR /app
+COPY . /app
+ENV SYGNAL_CONF=/app/sygnal.yaml
 
 EXPOSE 5000/tcp
 

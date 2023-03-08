@@ -87,6 +87,8 @@ class Counts:
 class Notification:
     def __init__(self, notif):
         # optional attributes
+        #  {'event_id': '111', 'type': None, 'sender': None, 'room_name': None, 'room_alias': None, 'membership': None, 'sender_display_name': None,
+        # 'content': None, 'room_id': '111', 'prio': 'high', 'unread': 1, 'missed_calls': None}
         self.room_name: Optional[str] = notif.get("room_name")
         self.room_alias: Optional[str] = notif.get("room_alias")
         self.prio: Optional[str] = notif.get("prio")
