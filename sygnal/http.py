@@ -218,6 +218,8 @@ class V1NotifyHandler(Resource):
                 the exact app id, immediately returns it.
                 Otherwise returns possible pushkins.
         """
+        print("appId: %s, sygnal.pushkins: %s" % (appid, self.sygnal.pushkins))
+        print("appId: %s, sygnal.pushkins: %s" % (appid, self.sygnal.pushkins.values()))
         # if found a specific appid, just return it as a list
         if appid in self.sygnal.pushkins:
             return [self.sygnal.pushkins[appid]]
@@ -373,7 +375,7 @@ class PushGatewayApiServer(object):
         root.putChild(b"_matrix", matrix)
         matrix.putChild(b"push", push)
         push.putChild(b"v1", v1)
-        v1.putChild(b"notify", V1NotifyHandler(sygnal))
+        v1.putChild(b"notify", V1NotifyHandler(sygnal)) ## /_matrix/push/v1/notify
 
         # add health
         root.putChild(b"health", HealthHandler())
