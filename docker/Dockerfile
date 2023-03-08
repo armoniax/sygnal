@@ -27,6 +27,9 @@ RUN python -m pip install --upgrade pip && pip install --prefix="/install" --no-
 
 FROM python:3.7-slim
 COPY --from=builder /install /usr/local
+WORKDIR /app
+COPY . /app
+ENV SYGNAL_CONF=/app/sygnal.yaml
 
 EXPOSE 5000/tcp
 
