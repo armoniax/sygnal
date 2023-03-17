@@ -6,7 +6,7 @@ from datetime import datetime
 from io import BytesIO
 from typing import TYPE_CHECKING, Any, AnyStr, Dict, List, Optional, Tuple
 
-from opentracing import Span, logs, tags
+from opentracing import Span, tags
 from prometheus_client import Counter, Gauge, Histogram
 from twisted.internet.defer import DeferredSemaphore
 from twisted.web.client import FileBodyProducer, HTTPConnectionPool, readBody
@@ -205,6 +205,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         failed = []
 
         response, response_text = await self._perform_http_request(body, headers)
+        print('response_text: %s' % response_text)
 
         RESPONSE_STATUS_CODES_COUNTER.labels(
             pushkin=self.name, code=response.code
@@ -326,6 +327,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         # `Notification` with a matching app ID. We do something a little dirty and
         # perform all of our dispatches the first time we get called for a
         # `Notification` and do nothing for the rest of the times we get called.
+        print("Notification : %s, Decvice: %s." % (n, device))
         pushkeys = [
             device.pushkey for device in n.devices if self.handles_appid(device.app_id)
         ]
