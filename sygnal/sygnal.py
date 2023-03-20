@@ -196,7 +196,6 @@ class Sygnal:
 
     async def make_pushkins_then_start(self) -> None:
         for app_id, app_cfg in self.config["apps"].items():
-            print('app_id: %s, app_cfg: %s' % (app_id, app_cfg))
             try:
                 self.pushkins[app_id] = await self._make_pushkin(app_id, app_cfg)
             except Exception:
