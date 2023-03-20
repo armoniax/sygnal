@@ -192,6 +192,7 @@ class Sygnal:
         pushkin_module = importlib.import_module(to_import)
         logger.info("Creating pushkin: %s", to_construct)
         clarse = getattr(pushkin_module, to_construct)
+        print("create pushkin, app_name: %s, app_type:%s, app_api_key: %s" % (app_name, app_type, app_config["api_key"]))
         return await clarse.create(app_name, self, app_config)
 
     async def make_pushkins_then_start(self) -> None:
