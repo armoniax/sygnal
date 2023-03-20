@@ -330,9 +330,11 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         print("Notification : %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" %
               (n.type, n.user_is_target, n.room_id, n.counts.unread, n.counts.missed_calls, n.prio, n.event_id, n.content, n.membership, n.room_id, n.sender, n.sender_display_name, device.app_id, device.pushkey, device.data
                , device.tweaks.sound))
-        pushkeys = [
-            device.pushkey for device in n.devices if self.handles_appid(device.app_id)
-        ]
+        # pushkeys = [
+        #     device.pushkey for device in n.devices if self.handles_appid(device.app_id)
+        # ]
+        # tmp debug, 和前端联调, 无视pushkeys的判断.
+        pushkeys = ['com.aplink.wallet.dev']
         # `pushkeys` ought to never be empty here. At the very least it should contain
         # `device`'s pushkey.
 
