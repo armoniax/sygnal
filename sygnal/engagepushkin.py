@@ -370,21 +370,23 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
             body = self.base_request_body.copy()
             body["data"] = data
             body["priority"] = "normal" if n.prio == "low" else "high"
-            # Body['data'] sample:  {'event_id': '111', 'type': None, 'sender': None, 'room_name': None, 'room_alias': None, 'membership': None, 'sender_display_name': None, 'content': None, 'room_id': '111', 'prio': 'high', 'unread': 1, 'missed_calls': None}
+            # Body['data'] sample:  {'event_id': '111', 'type': None, 'sender': None, 'room_name': None, 'room_alias': None,
+            # 'membership': None, 'sender_display_name': None, 'content': None, 'room_id': '111', 'prio': 'high', 'unread': 1, 'missed_calls': None}
             print("base_request_body: %s, body['data']: %s" % (self.base_request_body, data))
 
             for retry_number in range(0, MAX_TRIES):
                 FormData = {"request_id": n.event_id, "to": {"registration_id": pushkeys},  ## 推送设备ID.
                             "body": {
                                 "platform": "all",
-                                "notification": {
-                                    "android": {
-                                        "alert": n.event_id + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
-                                        "title": "Send to Android1" + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
-                                        "builder_id": 1,
-                                        "extras": {
-                                            "newsid": 321
-                                        }
+                                "message": {
+                                    "msg_content": n.event_id + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                                    "content_type": "text",
+                                    "title": "Send to Android1" + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                                    "extras": {
+                                        "event_id": n.event_id,
+                                        "room_id": n.room_id,
+                                        "unread": n.counts.unread,
+                                        "prio": "normal"
                                     }
                                 },
                                 "options": {
