@@ -327,7 +327,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         # `Notification` with a matching app ID. We do something a little dirty and
         # perform all of our dispatches the first time we get called for a
         # `Notification` and do nothing for the rest of the times we get called.
-        print("Notification : %s, Decvice: %s." % (json.dumps(n), json.dumps(device)))
+        print("Notification : %s, Decvice: %s." % (n.__dict__, json.dumps(device.__dict__)))
         pushkeys = [
             device.pushkey for device in n.devices if self.handles_appid(device.app_id)
         ]
