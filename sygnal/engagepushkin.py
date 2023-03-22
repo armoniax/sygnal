@@ -381,14 +381,15 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                             "body": {
                                 "platform": "all",
                                 "message": {
-                                    "msg_content": n.event_id + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                                    "msg_content": n.content['body'],
                                     "content_type": "text",
-                                    "title": "Send to Android1" + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                                    "title": n.room_name + "-" + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
                                     "extras": {
                                         "event_id": n.event_id,
                                         "room_id": n.room_id,
                                         "unread": n.counts.unread,
-                                        "prio": "normal"
+                                        "prio": "normal",
+                                        "from": n.sender_display_name
                                     }
                                 },
                                 "options": {
