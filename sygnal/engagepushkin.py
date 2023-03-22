@@ -383,7 +383,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                                 "message": {
                                     "msg_content": n.content['body'],
                                     "content_type": "text",
-                                    "title": n.room_name + "-" + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                                    "title": n.room_name,
                                     "extras": {
                                         "event_id": n.event_id,
                                         "room_id": n.room_id,
