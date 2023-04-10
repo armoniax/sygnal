@@ -398,7 +398,14 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                                 },
                                 "options": {
                                     "time_to_live": 86400,
-                                    "apns_production": False
+                                    "apns_production": False,
+                                    "third_party_channel": {
+                                        "huawei": {
+                                            "distribution_new": "mtpush_pns",
+                                            "importance": "NORMAL",
+                                            "category": "IM"
+                                        }
+                                    }
                                 }
                             }}
                 if len(pushkeys) == 1:
