@@ -55,7 +55,7 @@ RESPONSE_STATUS_CODES_COUNTER = Counter(
 
 logger = logging.getLogger(__name__)
 
-ENGAGE_URL = b"https://push.api.engagelab.cc/v4/push"
+ENGAGE_URL = b"https://push.api.engagelab.cc/v3/push"
 MAX_TRIES = 3
 RETRY_DELAY_BASE = 10
 MAX_BYTES_PER_FIELD = 1024
