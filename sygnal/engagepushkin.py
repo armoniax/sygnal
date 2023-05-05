@@ -381,33 +381,86 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
             else:
                 msg_content = 'no content, please set up pusher\'s format'
             for retry_number in range(0, MAX_TRIES):
-                FormData = {"request_id": n.event_id, "to": {"registration_id": pushkeys},  ## 推送设备ID.
-                            "body": {
-                                "platform": "all",
-                                "message": {
-                                    "msg_content": msg_content,
-                                    "content_type": "text",
-                                    "title": n.room_name,
-                                    "extras": {
-                                        "event_id": n.event_id,
-                                        "room_id": n.room_id,
-                                        "unread": n.counts.unread,
-                                        "prio": "normal",
-                                        "from": n.sender_display_name
-                                    }
-                                },
-                                "options": {
-                                    "time_to_live": 86400,
-                                    "apns_production": False,
-                                    "third_party_channel": {
-                                        "huawei": {
-                                            "distribution_new": "mtpush_pns",
-                                            "importance": "NORMAL",
-                                            "category": "IM"
-                                        }
-                                    }
-                                }
-                            }}
+                # FormData = {"request_id": n.event_id, "to": {"registration_id": pushkeys},  ## 推送设备ID.
+                #             "body": {
+                #                 "platform": "all",
+                #                 "message": {
+                #                     "msg_content": msg_content,
+                #                     "content_type": "text",
+                #                     "title": n.room_name,
+                #                     "extras": {
+                #                         "event_id": n.event_id,
+                #                         "room_id": n.room_id,
+                #                         "unread": n.counts.unread,
+                #                         "prio": "normal",
+                #                         "from": n.sender_display_name
+                #                     }
+                #                 },
+                #                 "options": {
+                #                     "time_to_live": 86400,
+                #                     "apns_production": False,
+                #                     "third_party_channel": {
+                #                         "huawei": {
+                #                             "distribution_new": "mtpush_pns",
+                #                             "importance": "NORMAL",
+                #                             "category": "IM"
+                #                         }
+                #                     }
+                #                 }
+                #             }}
+                FormData = {
+                    "platform": "android",
+                    "audience": {
+                        "registration_id": pushkeys
+                    },
+                    "notification": {
+                        "android": {
+                            "title": n.room_name,
+                            "alert": msg_content,
+                            # "builder_id": 0,
+                            "category": "alarm",
+                            # "small_icon": "mtpush_notification_icon",
+                            # "large_icon": "mtpush_notification_icon",
+                            "extras": {
+                                "event_id": n.event_id,
+                                "room_id": n.room_id,
+                                "unread": n.counts.unread,
+                                "prio": "normal",
+                                "from": n.sender_display_name
+                            },
+                            "priority": 1,
+                            "alert_type": 7,
+                            "sound": "coin",
+                            # "channel_id": "money",
+                            # "badge_add_num": 1,
+                            # "badge_class": "com.engagelab.app.activity.MainActivity",
+                            # "style": 2,
+                            # "big_text": "党的十八大提出，倡导富强、民主、文明、和谐，倡导自由、平等、公正、法治，倡导爱国、敬业、诚信、友善，积极培育和践行社会主义核心价值观。富强、民主、文明、和谐是国家层面的价值目标，自由、平等、公正、法治是社会层面的价值取向，爱国、敬业、诚信、友善是公民个人层面的价值准则，这 24 个字是社会主义核心价值观的基本内容。",
+                            # "inbox": {
+                            #     "inbox1": "this is inbox one",
+                            #     "inbox2": "this is inbox two",
+                            #     "inbox3": "this is inbox three"
+                            # },
+                            # "big_pic_path": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=96071541,1913562332&fm=26&gp=0.jpg",
+                            "intent": {
+                                "url": "intent:#Intent;component=com.engagelab.oaapp/com.engagelab.app.component.UserActivity400;end"
+                            }
+                        }
+                    },
+                    "options": {
+                        "third_party_channel": {
+                            "vivo": {
+                                "classification": 1,
+                                "pushMode": 1
+                            },
+                            "huawei": {
+                                "distribution_new": "mtpush_pns",
+                                "importance": "NORMAL",
+                                "category": "IM"
+                            }
+                        }
+                    }
+                }
                 if len(pushkeys) == 1:
                     body["to"] = pushkeys[0]
                 else:
