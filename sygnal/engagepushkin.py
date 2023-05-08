@@ -376,6 +376,8 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
             # 'membership': None, 'sender_display_name': None, 'content': None, 'room_id': '111', 'prio': 'high', 'unread': 1, 'missed_calls': None}
             print("base_request_body: %s, body['data']: %s" % (self.base_request_body, data))
 
+            ## TODO 做成配置项
+            app_key = "com.aplink.wallet.dev"
             if 'body' in n.content:
                 msg_content = n.content['body']
             else:
@@ -442,8 +444,11 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                             #     "inbox3": "this is inbox three"
                             # },
                             # "big_pic_path": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=96071541,1913562332&fm=26&gp=0.jpg",
+                            # "intent": {
+                            #     "url": "intent:#Intent;component=com.engagelab.oaapp/com.engagelab.app.component.UserActivity400;end"
+                            # }
                             "intent": {
-                                "url": "intent:#Intent;component=com.engagelab.oaapp/com.engagelab.app.component.UserActivity400;end"
+                                "url": "intent:#Intent;component=" + app_key + "/com.aplink.flutter_wallet_pptoken.MainActivity;end"
                             }
                         }
                     },
