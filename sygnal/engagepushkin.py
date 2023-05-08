@@ -107,7 +107,11 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         self.max_connections = self.get_config(
             "max_connections", int, DEFAULT_MAX_CONNECTIONS
         )
-
+        if "intent_app_key" in config:
+            self.app_key = config["intent_app_key"]
+        else:
+            self.app_key = "com.aplink.wallet.dev"
+        logger.info("Engagepushkin's app_key: %s", self.app_key)
         self.connection_semaphore = DeferredSemaphore(self.max_connections)
         self.http_pool.maxPersistentPerHost = self.max_connections
 
@@ -376,8 +380,6 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
             # 'membership': None, 'sender_display_name': None, 'content': None, 'room_id': '111', 'prio': 'high', 'unread': 1, 'missed_calls': None}
             print("base_request_body: %s, body['data']: %s" % (self.base_request_body, data))
 
-            ## TODO 做成配置项
-            app_key = "com.aplink.wallet.dev"
             if 'body' in n.content:
                 msg_content = n.content['body']
             else:
@@ -448,7 +450,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                             #     "url": "intent:#Intent;component=com.engagelab.oaapp/com.engagelab.app.component.UserActivity400;end"
                             # }
                             "intent": {
-                                "url": "intent:#Intent;component=" + app_key + "/com.aplink.flutter_wallet_pptoken.MainActivity;end"
+                                "url": "intent:#Intent;component=" + self.app_key + "/com.aplink.flutter_wallet_pptoken.MainActivity;end"
                             }
                         }
                     },
