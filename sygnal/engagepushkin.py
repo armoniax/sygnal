@@ -430,7 +430,8 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                                 "room_id": n.room_id,
                                 "unread": n.counts.unread,
                                 "prio": "normal",
-                                "from": n.sender_display_name
+                                "from": n.sender_display_name,
+                                "type": 1 # type = 1表示社交(与前端沟通)
                             },
                             "priority": 1,
                             "alert_type": 7,
