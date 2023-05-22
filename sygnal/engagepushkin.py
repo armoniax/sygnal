@@ -413,11 +413,23 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                 #                 }
                 #             }}
                 FormData = {
-                    "platform": "android",
+                    "platform": "all",
                     "audience": {
                         "registration_id": pushkeys
                     },
                     "notification": {
+                        "ios": {
+                            "alert": "hello, Push!",
+                            "badge": 1,
+                            "extras": {
+                                "event_id": n.event_id,
+                                "room_id": n.room_id,
+                                "unread": n.counts.unread,
+                                "prio": "normal",
+                                "from": n.sender_display_name,
+                                "type": 1 # type = 1表示社交(与前端沟通)
+                            }
+                        },
                         "android": {
                             "title": n.room_name,
                             "alert": msg_content,
