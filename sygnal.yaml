@@ -161,11 +161,9 @@ metrics:
 # For the type, you may specify a fully-qualified Python classname if desired.
 #
 apps:
-  # This is an example APNs push configuration
-  #
-  # com.example.myapp.ios:
-  #  type: apns
-  com.aplink.wallet:
+  com.aplink.wallet.dev:
+    ## TODO 生产环境是 com.aplink.wallet
+    intent_app_key: com.aplink.wallet.dev
     type: engage
     api_key: 0ea1b2a7f651a4afa04af5fd
   #
