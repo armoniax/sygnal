@@ -383,10 +383,13 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
             # 'membership': None, 'sender_display_name': None, 'content': None, 'room_id': '111', 'prio': 'high', 'unread': 1, 'missed_calls': None}
             print("base_request_body: %s, body['data']: %s" % (self.base_request_body, data))
 
-            if 'body' in n.content:
+            if n.content is not None and 'body' in n.content:
                 msg_content = n.content['body']
             else:
                 msg_content = 'no content, please set up pusher\'s format'
+                print("n.content is none: %s." % n.content)
+                failed = pushkeys
+                return failed
             for retry_number in range(0, MAX_TRIES):
                 # FormData = {"request_id": n.event_id, "to": {"registration_id": pushkeys},  ## 推送设备ID.
                 #             "body": {
