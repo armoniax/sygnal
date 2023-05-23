@@ -131,6 +131,9 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         if not self.api_key:
             raise PushkinSetupException("No API key set in config")
 
+        self.api_secret = self.get_config("api_secret", str)
+        if not self.api_secret:
+            raise PushkinSetupException("No API secret set in config")
         # Use the fcm_options config dictionary as a foundation for the body;
         # this lets the Sygnal admin choose custom FCM options
         # (e.g. content_available).
@@ -370,7 +373,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                 "User-Agent": ["sygnal"],
                 "Content-Type": ["application/json"],
                 # 设置极光API的认证
-                "Authorization": [self.get_jiguang_authorization_header(self.api_key)],
+                "Authorization": [self.get_jiguang_authorization_header(self.api_key, self.master_secret)],
             }
 
             body = self.base_request_body.copy()
@@ -579,8 +582,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
 
         return data
 
-    def get_jiguang_authorization_header(self, app_key) -> str:
-        master_secret = '24df3fd204bb0fa025b4e838'
+    def get_jiguang_authorization_header(self, app_key, master_secret) -> str:
         base64_str = self.get_authoration(app_key, master_secret)
         return 'Basic ' + base64_str
 

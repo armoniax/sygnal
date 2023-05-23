@@ -166,6 +166,7 @@ apps:
     intent_app_key: com.aplink.wallet.dev
     type: engage
     api_key: 0ea1b2a7f651a4afa04af5fd
+    api_secret: 24df3fd204bb0fa025b4e838
   #
   #  # Authentication
   #  #
