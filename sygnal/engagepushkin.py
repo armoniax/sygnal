@@ -425,7 +425,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                     },
                     "notification": {
                         "ios": {
-                            "alert": "hello, Push!",
+                            "alert": msg_content,
                             "badge": 1,
                             "extras": {
                                 "event_id": n.event_id,
