@@ -427,7 +427,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                     },
                     "notification": {
                         "ios": {
-                            "alert": msg_content,
+                            "alert": {"title": n.room_name, "subtitle": msg_content},
                             "badge": 1,
                             "extras": {
                                 "event_id": n.event_id,
