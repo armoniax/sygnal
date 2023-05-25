@@ -184,7 +184,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         try:
             with SEND_TIME_HISTOGRAM.time():
                 with ACTIVE_REQUESTS_GAUGE.track_inprogress():
-                    print("Engage notify url: %s, headers: %s, body: %s", ENGAGE_URL, headers, body)
+                    # print("Engage notify url: %s, headers: %s, body: %s", ENGAGE_URL, headers, body)
                     response = await self.http_agent.request(
                         b"POST",
                         ENGAGE_URL,
@@ -214,7 +214,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         failed = []
 
         response, response_text = await self._perform_http_request(body, headers)
-        print('response_text: %s' % response_text)
+        # print('response_text: %s' % response_text)
 
         RESPONSE_STATUS_CODES_COUNTER.labels(
             pushkin=self.name, code=response.code
@@ -244,6 +244,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
                 response.code,
                 response_text,
             )
+            print('400, response_text: %s' % response_text)
             # permanent failure: give up
             raise NotificationDispatchException("Invalid request")
         elif response.code == 401:
@@ -336,9 +337,9 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         # `Notification` with a matching app ID. We do something a little dirty and
         # perform all of our dispatches the first time we get called for a
         # `Notification` and do nothing for the rest of the times we get called.
-        print("Notification : type: %s, %s, room_id: %s, unread: %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, device.pushkey: %s, %s, %s" %
-              (n.type, n.user_is_target, n.room_id, n.counts.unread, n.counts.missed_calls, n.prio, n.event_id, n.content, n.membership, n.room_id, n.sender, n.sender_display_name, device.app_id, device.pushkey, device.data
-               , device.tweaks.sound))
+        # print("Notification : type: %s, %s, room_id: %s, unread: %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, device.pushkey: %s, %s, %s" %
+        #       (n.type, n.user_is_target, n.room_id, n.counts.unread, n.counts.missed_calls, n.prio, n.event_id, n.content, n.membership, n.room_id, n.sender, n.sender_display_name, device.app_id, device.pushkey, device.data
+        #        , device.tweaks.sound))
         pushkeys = [
             device.pushkey for device in n.devices if self.handles_appid(device.app_id)
         ]
@@ -383,7 +384,7 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
             body["priority"] = "normal" if n.prio == "low" else "high"
             # Body['data'] sample:  {'event_id': '111', 'type': None, 'sender': None, 'room_name': None, 'room_alias': None,
             # 'membership': None, 'sender_display_name': None, 'content': None, 'room_id': '111', 'prio': 'high', 'unread': 1, 'missed_calls': None}
-            print("base_request_body: %s, body['data']: %s" % (self.base_request_body, data))
+            # print("base_request_body: %s, body['data']: %s" % (self.base_request_body, data))
 
             if n.content is not None and 'body' in n.content:
                 msg_content = n.content['body']
@@ -596,5 +597,5 @@ class EngagePushkin(ConcurrencyLimitedPushkin):
         origin_str = origin_str.encode('utf-8')
         base64_str_bytes = base64.b64encode(origin_str)
         base64_str = base64_str_bytes.decode()
-        print('base64 str: %s' % base64_str)
+        # print('base64 str: %s' % base64_str)
         return base64_str
