@@ -218,7 +218,7 @@ class V1NotifyHandler(Resource):
                 the exact app id, immediately returns it.
                 Otherwise returns possible pushkins.
         """
-        print("appId: %s, sygnal.pushkins: %s" % (appid, str(self.sygnal.pushkins)))
+        # print("appId: %s, sygnal.pushkins: %s" % (appid, str(self.sygnal.pushkins)))
         
         # if found a specific appid, just return it as a list
         if appid in self.sygnal.pushkins:
